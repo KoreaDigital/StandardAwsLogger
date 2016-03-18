@@ -7,21 +7,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExportProjects", "ExportPro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SensorsProjects", "SensorsProjects", "{87F59412-742F-40CE-A8DE-C40DD531500A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSVExport", "..\..\ExportProjects\CSVExport\CSVExport.csproj", "{5092480D-79BF-421D-9E3E-F13E62AE16E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSVExport_vs2013", "..\..\ExportProjects\CSVExport\CSVExport_vs2013.csproj", "{5092480D-79BF-421D-9E3E-F13E62AE16E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT211ModemExport", "..\..\ExportProjects\MT211ModemExport\MT211ModemExport.csproj", "{A1D0FF50-2286-409E-A317-1BD3582CE0FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT211ModemExport_vs2013", "..\..\ExportProjects\MT211ModemExport\MT211ModemExport_vs2013.csproj", "{A1D0FF50-2286-409E-A317-1BD3582CE0FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HML155_Analog_Humidity", "..\..\SensorProjects\HML155_Analog_Humidity\HML155_Analog_Humidity.csproj", "{8753EBE2-8320-40A9-B733-613BE0F3A92B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HML155_Analog_Humidity_vs2013", "..\..\SensorProjects\HML155_Analog_Humidity\HML155_Analog_Humidity_vs2013.csproj", "{8753EBE2-8320-40A9-B733-613BE0F3A92B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HML155_Analog_Temperature", "..\..\SensorProjects\HML155_Analog_Temperature\HML155_Analog_Temperature.csproj", "{7AA7AFEC-DA0C-463B-8E3A-27A90CD1FB7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HML155_Analog_Temperature_vs2013", "..\..\SensorProjects\HML155_Analog_Temperature\HML155_Analog_Temperature_vs2013.csproj", "{7AA7AFEC-DA0C-463B-8E3A-27A90CD1FB7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HML155_RS485", "..\..\SensorProjects\HML155_RS485\HML155_RS485.csproj", "{DD23FD08-19E8-4313-8396-E31BD8A5B9BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HML155_RS485_vs2013", "..\..\SensorProjects\HML155_RS485\HML155_RS485_vs2013.csproj", "{DD23FD08-19E8-4313-8396-E31BD8A5B9BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PT100_Analog_Temperature", "..\..\SensorProjects\PT100_Analog_Temperature\PT100_Analog_Temperature.csproj", "{F8F89F94-B09F-4ECA-9816-B4E52B59E744}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PT100_Analog_Temperature_vs2013", "..\..\SensorProjects\PT100_Analog_Temperature\PT100_Analog_Temperature_vs2013.csproj", "{F8F89F94-B09F-4ECA-9816-B4E52B59E744}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WAA151_Anemometer", "..\..\SensorProjects\WAA151_Anemometer\WAA151_Anemometer.csproj", "{09E7780A-845B-4804-BF32-E53E7AFC36EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WAA151_Anemometer_vs2013", "..\..\SensorProjects\WAA151_Anemometer\WAA151_Anemometer_vs2013.csproj", "{09E7780A-845B-4804-BF32-E53E7AFC36EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WAV151_WindVane", "..\..\SensorProjects\WAV151_WindVane\WAV151_WindVane.csproj", "{A401046B-3788-44B8-959F-DCA683949B00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WAV151_WindVane_vs2013", "..\..\SensorProjects\WAV151_WindVane\WAV151_WindVane_vs2013.csproj", "{A401046B-3788-44B8-959F-DCA683949B00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
