@@ -3,7 +3,6 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Net;
 using System.Windows.Forms;
-using com.koreadigital.common;
 
 namespace MT211ModemExport
 {
@@ -14,6 +13,7 @@ namespace MT211ModemExport
 		private bool mComportValid;
 		private bool mServerAddrValid;
 		private bool mServerPortValid;
+		private bool mStationIdValid;
 
 		private static Color ALERT_COLOR = Color.Salmon;
 		private static Color NORMAL_COLOR = SystemColors.Control;
@@ -57,6 +57,7 @@ namespace MT211ModemExport
 			// Server 주소를 채움
 			textBox_serverAddr.Text = mSetting.ServerAddr;
 			textBox_serverPort.Text = mSetting.ServerPort.ToString();
+			textBox_station_id.Text = mSetting.StationId.ToString();
 		}
 
 		private void checkValidAndUpdateValue()
@@ -123,7 +124,25 @@ namespace MT211ModemExport
 				panel_serverPort.BackColor = mServerPortValid ? NORMAL_COLOR : ALERT_COLOR;
 			}
 
-			button_apply.Enabled = (mComportValid && mServerAddrValid && mServerPortValid);
+			{
+				// Station Id 체크
+				try
+				{
+					int value = Int32.Parse(textBox_station_id.Text);
+					mStationIdValid = (0 < value) && (value < 32768);
+					if( mStationIdValid )
+					{
+						mSetting.StationId = value;
+					}
+				}
+				catch
+				{
+					mStationIdValid = false;
+				}
+				panel_StationId.BackColor = mStationIdValid ? NORMAL_COLOR : ALERT_COLOR;
+			}
+
+			button_apply.Enabled = (mComportValid && mServerAddrValid && mServerPortValid && mStationIdValid);
 		}
 
 		private void comboBox_comPort_SelectedIndexChanged(object sender, EventArgs e)
@@ -145,6 +164,23 @@ namespace MT211ModemExport
 		{
 			// 포트 번호는 숫자만 입력되도록 한다.
 
+			bool isDigit = Char.IsDigit(e.KeyChar);
+			bool isBackspace = ((int) Keys.Back == e.KeyChar);
+			if( (false == isDigit) && (false == isBackspace) )
+			{
+				// 지정한 문자 외에는 무시
+				e.Handled = true;
+			}
+		}
+
+		private void textBox_station_id_TextChanged(object sender, EventArgs e)
+		{
+			checkValidAndUpdateValue();
+		}
+
+		private void textBox_station_id_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			// Station ID 는 숫자만 입력되도록 한다.
 			bool isDigit = Char.IsDigit(e.KeyChar);
 			bool isBackspace = ((int) Keys.Back == e.KeyChar);
 			if( (false == isDigit) && (false == isBackspace) )

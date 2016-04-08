@@ -31,6 +31,7 @@
 			System.Windows.Forms.Label label_comPort;
 			System.Windows.Forms.Label label_serverAddr;
 			System.Windows.Forms.Label label_serverPort;
+			System.Windows.Forms.Label label_station_name;
 			this.textBox_serverAddr = new System.Windows.Forms.TextBox();
 			this.textBox_serverPort = new System.Windows.Forms.TextBox();
 			this.comboBox_comPort = new System.Windows.Forms.ComboBox();
@@ -39,12 +40,16 @@
 			this.panel_comPort = new System.Windows.Forms.Panel();
 			this.panel_serverAddr = new System.Windows.Forms.Panel();
 			this.panel_serverPort = new System.Windows.Forms.Panel();
+			this.panel_StationId = new System.Windows.Forms.Panel();
+			this.textBox_station_id = new System.Windows.Forms.TextBox();
 			label_comPort = new System.Windows.Forms.Label();
 			label_serverAddr = new System.Windows.Forms.Label();
 			label_serverPort = new System.Windows.Forms.Label();
+			label_station_name = new System.Windows.Forms.Label();
 			this.panel_comPort.SuspendLayout();
 			this.panel_serverAddr.SuspendLayout();
 			this.panel_serverPort.SuspendLayout();
+			this.panel_StationId.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// label_comPort
@@ -73,6 +78,15 @@
 			label_serverPort.Size = new System.Drawing.Size(95, 12);
 			label_serverPort.TabIndex = 10;
 			label_serverPort.Text = "서버 Port 번호 : ";
+			// 
+			// label_station_name
+			// 
+			label_station_name.AutoSize = true;
+			label_station_name.Location = new System.Drawing.Point(3, 10);
+			label_station_name.Name = "label_station_name";
+			label_station_name.Size = new System.Drawing.Size(69, 12);
+			label_station_name.TabIndex = 10;
+			label_station_name.Text = "지점 번호 : ";
 			// 
 			// textBox_serverAddr
 			// 
@@ -103,7 +117,7 @@
 			// 
 			// button_cancel
 			// 
-			this.button_cancel.Location = new System.Drawing.Point(213, 136);
+			this.button_cancel.Location = new System.Drawing.Point(213, 178);
 			this.button_cancel.Name = "button_cancel";
 			this.button_cancel.Size = new System.Drawing.Size(75, 23);
 			this.button_cancel.TabIndex = 14;
@@ -113,7 +127,7 @@
 			// 
 			// button_apply
 			// 
-			this.button_apply.Location = new System.Drawing.Point(132, 136);
+			this.button_apply.Location = new System.Drawing.Point(132, 178);
 			this.button_apply.Name = "button_apply";
 			this.button_apply.Size = new System.Drawing.Size(75, 23);
 			this.button_apply.TabIndex = 13;
@@ -149,12 +163,32 @@
 			this.panel_serverPort.Size = new System.Drawing.Size(276, 34);
 			this.panel_serverPort.TabIndex = 17;
 			// 
+			// panel_StationId
+			// 
+			this.panel_StationId.BackColor = System.Drawing.SystemColors.Control;
+			this.panel_StationId.Controls.Add(label_station_name);
+			this.panel_StationId.Controls.Add(this.textBox_station_id);
+			this.panel_StationId.Location = new System.Drawing.Point(12, 133);
+			this.panel_StationId.Name = "panel_StationId";
+			this.panel_StationId.Size = new System.Drawing.Size(276, 34);
+			this.panel_StationId.TabIndex = 19;
+			// 
+			// textBox_station_id
+			// 
+			this.textBox_station_id.Location = new System.Drawing.Point(78, 7);
+			this.textBox_station_id.Name = "textBox_station_id";
+			this.textBox_station_id.Size = new System.Drawing.Size(63, 21);
+			this.textBox_station_id.TabIndex = 11;
+			this.textBox_station_id.TextChanged += new System.EventHandler(this.textBox_station_id_TextChanged);
+			this.textBox_station_id.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_station_id_KeyPress);
+			// 
 			// ModemExportSetupForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(297, 165);
+			this.ClientSize = new System.Drawing.Size(297, 208);
 			this.ControlBox = false;
+			this.Controls.Add(this.panel_StationId);
 			this.Controls.Add(this.panel_serverPort);
 			this.Controls.Add(this.panel_serverAddr);
 			this.Controls.Add(this.panel_comPort);
@@ -168,6 +202,8 @@
 			this.panel_serverAddr.PerformLayout();
 			this.panel_serverPort.ResumeLayout(false);
 			this.panel_serverPort.PerformLayout();
+			this.panel_StationId.ResumeLayout(false);
+			this.panel_StationId.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -182,6 +218,8 @@
 		private System.Windows.Forms.Panel panel_comPort;
 		private System.Windows.Forms.Panel panel_serverAddr;
 		private System.Windows.Forms.Panel panel_serverPort;
+		private System.Windows.Forms.Panel panel_StationId;
+		private System.Windows.Forms.TextBox textBox_station_id;
 
 	}
 }

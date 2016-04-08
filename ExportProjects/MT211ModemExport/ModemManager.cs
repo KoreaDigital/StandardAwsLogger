@@ -8,6 +8,8 @@ namespace MT211ModemExport
 {
 	class ModemManager
 	{
+		private const string TAG = "ModemManager";
+
 		private MT211Modem mModem;
 		private Thread mModemThread;
 		private ExportSetting mSetting;
@@ -18,8 +20,7 @@ namespace MT211ModemExport
 		private bool mInitComplete;
 		private object mMsgSync;
 
-		private DateTime mLastDataTime;
-		private List<WSensor> mLastSensorData;
+		private byte[] mLastData;
 
 		public ModemManager(ExportSetting setting)
 		{
@@ -34,13 +35,12 @@ namespace MT211ModemExport
 			mModemThread.Start();
 		}
 
-		public void sendMsg(DateTime date, List<WSensor> sensorList)
+		public void sendMsg(KmaDataStructure data)
 		{
 			lock( mMsgSync )
 			{
-				mLastDataTime = date;
-				mLastSensorData = new List<WSensor>(sensorList);
-
+				data.changeStationId(mSetting.StationId);
+				mLastData = data.getBufferClone();
 				if( (true == mRun) && (true == mInitComplete) )
 				{
 					Monitor.Pulse(mMsgSync);
@@ -84,8 +84,7 @@ namespace MT211ModemExport
 				return;
 			}
 
-			DateTime valueDateTimeCache;
-			List<WSensor> valueSensorInfoCache;
+			byte[] buffer;
 
 			mInitComplete = true;
 			while( mRun )
@@ -93,14 +92,17 @@ namespace MT211ModemExport
 				// 데이터가 오기를 기다림.
 				lock( mMsgSync )
 				{
-					Monitor.Wait(mMsgSync);
-
-					valueDateTimeCache = mLastDataTime;
-					valueSensorInfoCache = mLastSensorData;
+					Monitor.Wait(mMsgSync, 100);
+					buffer = mLastData;
+					mLastData = null;
 				}
 				if( false == mRun )
 				{
 					break;
+				}
+				if( null == buffer )
+				{
+					continue;
 				}
 
 				// 24시간 이상 접속이 되어 있으면 연결이 해제된다. (확인중)
@@ -118,23 +120,7 @@ namespace MT211ModemExport
 				// TCP 열고, 데이터 보내고, TCP 끊고.
 				if( MT211Modem.RESULT_OK == mModem.openCon() )
 				{
-					StringBuilder strBuilder = new StringBuilder();
-					{
-						strBuilder.Append("Time=");
-						long unixTimeStamp_InSec = valueDateTimeCache.Ticks / 10000000L;
-						strBuilder.Append(unixTimeStamp_InSec.ToString());
-					}
-
-					foreach( WSensor sensor in valueSensorInfoCache )
-					{
-						foreach( WSensor.Unit unit in sensor.units )
-						{
-							string tmp = string.Format(",{0}={1}", unit.unit_name, unit.format(false));
-							strBuilder.Append(tmp);
-						}
-					}
-
-					if( MT211Modem.RESULT_OK != mModem.sendToServer(strBuilder.ToString()) )
+					if( MT211Modem.RESULT_OK != mModem.sendToServer(buffer) )
 					{
 						mModem.resetModem();
 					}

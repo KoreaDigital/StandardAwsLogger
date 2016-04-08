@@ -11,8 +11,6 @@ namespace MT211ModemExport
 {
 	class MT211Modem
 	{
-		private bool mModemZipStat = false;
-
 		public const int RESULT_OK = 0x00;
 		public const int ERROR_CODE_SERIAL_WRITE_TIMEOUT = 0x01;
 		public const int ERROR_CODE_WAIT_ACK_TIMEOUT = 0x02;
@@ -23,7 +21,9 @@ namespace MT211ModemExport
 
 		// 모뎀의 포트 번호가 변경 된다면 이곳을 수정해야 한다.
 		private const int MODEM_PORT_NUM = 60;
+
 		private bool mEventAckReceived = false; // ATCommand 가 원하는 Ack 를 충족시키면 set.
+		private bool mModemZipStat = false;
 
 		private SerialPort mSerialPort;
 		// data receive 에 사용되는 변수들
@@ -273,18 +273,13 @@ namespace MT211ModemExport
 		}
 
 		// "A" => "41"
-		private string convertHexString(string message)
+		private string convertHexString(byte[] msg)
 		{
 			string hexMessage = "";
-			char[] values = message.ToCharArray();
-
-			foreach( char value in values )
+			foreach( byte value in msg )
 			{
-				int tmp = Convert.ToInt16(value);
-
-				hexMessage += tmp.ToString("X2");
+				hexMessage += value.ToString("X2");
 			}
-
 			return hexMessage;
 		}
 
@@ -404,7 +399,7 @@ namespace MT211ModemExport
 			return writeATCommand("AT+ZIPCLOSE=1\r\n", 20000);
 		}
 
-		public int sendToServer(string msg)
+		public int sendToServer(byte[] msg)
 		{
 			mCounter++;
 			Log.i("ModemManager", "sendToServer" + mCounter);
@@ -417,10 +412,11 @@ namespace MT211ModemExport
 
 		public int resetModem()
 		{
+			mModemZipStat = false;
+
 			Log.i("ModemManager", "resetModem");
 			clearAcks();
 			addAck("OK");
-			addAck("+ZIPSEND: 1,");
 
 			return writeATCommand("AT+CFUN=1,1\r\n", 20000);
 		}

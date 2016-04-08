@@ -44,6 +44,7 @@ namespace HML155_RS485
 				unit.unit_name = "Temperature";
 				unit.unit_text = "℃";
 				unit.unit_format = "{0:#0.00}";
+				unit.sensor_type = KMASensorType.Sensor_Temperature;
 
 				unit.min = -80;
 				unit.max = 60;
@@ -56,6 +57,7 @@ namespace HML155_RS485
 				unit.unit_name = "Humidity";
 				unit.unit_text = "RH %";
 				unit.unit_format = "{0:#0.0}";
+				unit.sensor_type = KMASensorType.Sensor_Humidity;
 
 				unit.min = 0;
 				unit.min = 100;

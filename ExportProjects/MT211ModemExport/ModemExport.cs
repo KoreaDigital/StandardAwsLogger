@@ -11,7 +11,7 @@ namespace MT211ModemExport
 		private const string TAG = "ModemExport";
 
 		private ExportSetting mSetting;
-		private ModemManager mManager;
+		private ModemManager mModemManager;
 
 		public ModemExport(List<WSensor> sensorlistclon)
 			: base(sensorlistclon)
@@ -37,11 +37,17 @@ namespace MT211ModemExport
 		//센서값이 업데이트 될때마다 호출된다.
 		public override void Update(DateTime time, List<WSensor> sensorList)
 		{
+			// __noop;
+		}
+
+		// 1분마다 데이터가 정리되면 호출된다.
+		public override void Update(KmaDataStructure data)
+		{
 			lock( this )
 			{
-				if( null != mManager )
+				if( (null != data) && (null != mModemManager) )
 				{
-					mManager.sendMsg(time, sensorList);
+					mModemManager.sendMsg(data);
 				}
 			}
 		}
@@ -59,7 +65,10 @@ namespace MT211ModemExport
 				mSetting.save();
 
 				stopModemThread();
-				startModemThread();
+				if( mSetting.isValid() )
+				{
+					startModemThread();
+				}
 			}
 		}
 
@@ -67,11 +76,11 @@ namespace MT211ModemExport
 		{
 			lock( this )
 			{
-				Debug.Assert(null == mManager);
+				Debug.Assert(null == mModemManager);
 
-				mManager = new ModemManager(mSetting);
-				mManager.ModemStatusChanged += new ModemStatusChangedHandler(MT211_ModemStatusChanged);
-				mManager.start();
+				mModemManager = new ModemManager(mSetting);
+				mModemManager.ModemStatusChanged += new ModemStatusChangedHandler(MT211_ModemStatusChanged);
+				mModemManager.start();
 			}
 		}
 
@@ -84,10 +93,10 @@ namespace MT211ModemExport
 		{
 			lock( this )
 			{
-				if( null != mManager )
+				if( null != mModemManager )
 				{
-					mManager.stop();
-					mManager = null;
+					mModemManager.stop();
+					mModemManager = null;
 				}
 			}
 		}

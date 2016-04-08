@@ -1,7 +1,6 @@
 ﻿using SDKforAWS;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace TestCSVExport
@@ -62,6 +61,11 @@ namespace TestCSVExport
 			}
 
 			mExporter.Write(time, sensorList);
+		}
+
+		public override void Update(KmaDataStructure data)
+		{
+			// __noop;
 		}
 
 		//사용자설정이 필요한 경우 

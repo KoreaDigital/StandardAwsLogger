@@ -1,5 +1,4 @@
 ﻿using SDKforAWS;
-using System.Diagnostics;
 
 namespace HML155_Analog_Humidity
 {
@@ -21,6 +20,7 @@ namespace HML155_Analog_Humidity
 				unit.unit_name = "Humidity";
 				unit.unit_text = "RH %";
 				unit.unit_format = "{0:#0.00}";
+				unit.sensor_type = KMASensorType.Sensor_Humidity;
 
 				unit.min = 0;
 				unit.max = 100;

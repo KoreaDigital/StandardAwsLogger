@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
 using System.Net;
-using Microsoft.Win32;
 
 namespace MT211ModemExport
 {
@@ -10,6 +9,7 @@ namespace MT211ModemExport
 		private const string VALUE_COM_PORT = "ComPort";
 		private const string VALUE_SERVER_ADDR = "ServerAddr";
 		private const string VALUE_SERVER_PORT = "ServerPort";
+		private const string VALUE_STATION_ID = "StationId";
 
 		public static ExportSetting load()
 		{
@@ -21,6 +21,7 @@ namespace MT211ModemExport
 				setting.ComPort = (int) myKey.GetValue(VALUE_COM_PORT, null);
 				setting.ServerAddr = (string) myKey.GetValue(VALUE_SERVER_ADDR, null);
 				setting.ServerPort = (int) myKey.GetValue(VALUE_SERVER_PORT, null);
+				setting.StationId = (int) myKey.GetValue(VALUE_STATION_ID, 0);
 			}
 
 			if( null == setting.ServerAddr )
@@ -34,12 +35,14 @@ namespace MT211ModemExport
 		public int ComPort;
 		public string ServerAddr;
 		public int ServerPort;
+		public int StationId;
 
 		private ExportSetting()
 		{
 			ComPort = 0;
 			ServerAddr = string.Empty;
 			ServerPort = 0;
+			StationId = 0;
 		}
 
 		// copy contructor
@@ -48,6 +51,7 @@ namespace MT211ModemExport
 			this.ComPort = other.ComPort;
 			this.ServerAddr = other.ServerAddr;
 			this.ServerPort = other.ServerPort;
+			this.StationId = other.StationId;
 		}
 
 		public void save()
@@ -58,12 +62,13 @@ namespace MT211ModemExport
 				myKey.SetValue(VALUE_COM_PORT, ComPort, RegistryValueKind.DWord);
 				myKey.SetValue(VALUE_SERVER_ADDR, ServerAddr, RegistryValueKind.String);
 				myKey.SetValue(VALUE_SERVER_PORT, ServerPort, RegistryValueKind.DWord);
+				myKey.SetValue(VALUE_STATION_ID, StationId, RegistryValueKind.DWord);
 			}
 		}
 
 		public bool isValid()
 		{
-			return (0 < ComPort) && (0 < ServerAddr.Length) && (0 < ServerPort);
+			return (0 < ComPort) && (0 < ServerAddr.Length) && (0 < ServerPort) && (0 < StationId) && (StationId < 32768);
 		}
 
 		public string ComPortName

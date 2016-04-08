@@ -1,7 +1,6 @@
 ﻿using SDKforAWS;
 using System;
 using System.Collections;
-using System.Diagnostics;
 
 namespace WAV151_WindVane
 {
@@ -27,6 +26,7 @@ namespace WAV151_WindVane
 				unit.unit_name = "Wind Vane";
 				unit.unit_text = "˚";
 				unit.unit_format = "{0:0.0}";
+				unit.sensor_type = KMASensorType.Sensor_WindVane;
 
 				unit.min = 0;
 				unit.max = 360;

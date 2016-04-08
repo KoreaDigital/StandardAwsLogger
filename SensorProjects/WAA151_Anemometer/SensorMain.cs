@@ -1,6 +1,5 @@
 ﻿using SDKforAWS;
 using System;
-using System.Diagnostics;
 
 namespace WAA151_Anemometer
 {
@@ -25,6 +24,7 @@ namespace WAA151_Anemometer
 				unit.unit_name = "Anemometer";
 				unit.unit_text = "m/s";
 				unit.unit_format = "{0:0.##}";
+				unit.sensor_type = KMASensorType.Sensor_WindSpeed;
 
 				unit.min = 0.4;
 				unit.max = 75;

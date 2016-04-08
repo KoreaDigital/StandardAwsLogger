@@ -22,6 +22,8 @@ namespace PT100_Analog_Temp
 				unit.unit_name = "Temperature";
 				unit.unit_text = "℃";
 				unit.unit_format = "{0:#0.00}";
+				unit.sensor_type = KMASensorType.Sensor_Temperature;
+
 				this.units.Add(unit);
 			}
 		}
